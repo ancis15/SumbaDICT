@@ -4,31 +4,37 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kamus Sumba-Indonesia</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      background: #f9f9f9;
+      background: #f0f4f8;
       margin: 0;
-      padding: 2rem;
+      padding: 1rem;
       color: #333;
     }
     h1 {
       text-align: center;
-      color: #2e4057;
+      color: #34495e;
+      margin-bottom: 1rem;
     }
     .search-box {
       max-width: 600px;
-      margin: 2rem auto;
+      margin: 0 auto 2rem auto;
       display: flex;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    @media(min-width: 600px) {
+      .search-box {
+        flex-direction: row;
+      }
     }
     input, select {
       padding: 0.75rem;
       font-size: 1rem;
-      flex: 1;
-    }
-    select {
-      width: 150px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
     }
     ul {
       max-width: 600px;
@@ -41,7 +47,7 @@
       margin: 0.5rem 0;
       padding: 1rem;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
   </style>
 </head>
