@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sumba-Indo Dictionary</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="Dictionary Logo" class="logo">
+    <h1>Sumba–Indonesian Dictionary</h1>
+    <p class="creator">Created by [Your Name]</p>
+  </header>
+
+  <input type="text" id="searchBox" placeholder="Cari kata Sumba...">
+  <ul id="suggestions"></ul>
+  <div id="results"></div>
+
+  <script src="dictionary.js"></script>
+  <script>
+    const searchBox = document.getElementById('searchBox');
+    const results = document.getElementById('results');
+    const suggestions = document.getElementById('suggestions');
+
+    searchBox.addEventListener('input', function() {
+      const query = this.value.toLowerCase();
+      results.innerHTML = '';
+      suggestions.innerHTML = '';
+
+      if (query.length === 0) return;
+
+      let count = 0;
+      for (const word in dictionary) {
+        if (word.toLowerCase().includes(query)) {
+          if (count < 5) {
+            const li = document.createElement('li');
+            li.textContent = word;
+            li.onclick = () => {
+              searchBox.value = word;
+              showResult(word);
+              suggestions.innerHTML = '';
+            };
+            suggestions.appendChild(li);
+            count++;
+          }
+        }
+      }
+    });
+
+    function showResult(word) {
+      results.innerHTML = '';
+      if (dictionary[word]) {
+        const div = document.createElement('div');
+        div.className = 'entry';
+        div.innerHTML = `<strong>${word}</strong>: ${dictionary[word]}`;
+        results.appendChild(div);
+      }
+    }
+  </script>
+</body>
+</html>
