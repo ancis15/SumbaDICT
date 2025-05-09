@@ -1,60 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Sumba-Indo Dictionary</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kamus Sumba-Indonesia</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 2rem;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #2e4057;
+    }
+    .search-box {
+      max-width: 600px;
+      margin: 2rem auto;
+      display: flex;
+      gap: 0.5rem;
+    }
+    input, select {
+      padding: 0.75rem;
+      font-size: 1rem;
+      flex: 1;
+    }
+    select {
+      width: 150px;
+    }
+    ul {
+      max-width: 600px;
+      margin: auto;
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: white;
+      margin: 0.5rem 0;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="Dictionary Logo" class="logo">
-    <h1>Sumba–Indonesian Dictionary</h1>
-    <p class="creator">Created by [Your Name]</p>
-  </header>
+  <h1>Kamus Sumba – Indonesia</h1>
+  <div class="search-box">
+    <select id="mode">
+      <option value="to-indo">Sumba → Indonesia</option>
+      <option value="to-sumba">Indonesia → Sumba</option>
+    </select>
+    <input type="text" id="search" placeholder="Cari kata..." oninput="searchWords()"/>
+  </div>
+  <ul id="results"></ul>
 
-  <input type="text" id="searchBox" placeholder="Cari kata Sumba...">
-  <ul id="suggestions"></ul>
-  <div id="results"></div>
-
-  <script src="dictionary.js"></script>
   <script>
-    const searchBox = document.getElementById('searchBox');
-    const results = document.getElementById('results');
-    const suggestions = document.getElementById('suggestions');
+    const dictionary = [{'kambera': 'ana', 'indonesia': 'anak'}, {'kambera': 'meta', 'indonesia': 'bagus'}, {'kambera': 'ngara', 'indonesia': 'nama'}, {'kambera': 'wai', 'indonesia': 'air'}, {'kambera': 'mata', 'indonesia': 'mata'}];
 
-    searchBox.addEventListener('input', function() {
-      const query = this.value.toLowerCase();
-      results.innerHTML = '';
-      suggestions.innerHTML = '';
+    function searchWords() {
+      const mode = document.getElementById("mode").value;
+      const input = document.getElementById("search").value.toLowerCase();
+      const results = document.getElementById("results");
+      results.innerHTML = "";
 
-      if (query.length === 0) return;
+      dictionary.forEach(entry => {
+        let source = mode === "to-indo" ? entry.kambera : entry.indonesia;
+        let target = mode === "to-indo" ? entry.indonesia : entry.kambera;
 
-      let count = 0;
-      for (const word in dictionary) {
-        if (word.toLowerCase().includes(query)) {
-          if (count < 5) {
-            const li = document.createElement('li');
-            li.textContent = word;
-            li.onclick = () => {
-              searchBox.value = word;
-              showResult(word);
-              suggestions.innerHTML = '';
-            };
-            suggestions.appendChild(li);
-            count++;
-          }
+        if (source.toLowerCase().includes(input)) {
+          const item = document.createElement("li");
+          item.textContent = source + " → " + target;
+          results.appendChild(item);
         }
-      }
-    });
-
-    function showResult(word) {
-      results.innerHTML = '';
-      if (dictionary[word]) {
-        const div = document.createElement('div');
-        div.className = 'entry';
-        div.innerHTML = `<strong>${word}</strong>: ${dictionary[word]}`;
-        results.appendChild(div);
-      }
+      });
     }
   </script>
 </body>
