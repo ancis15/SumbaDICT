@@ -8,19 +8,26 @@
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
-      background: #f0f4f8;
+      background: #fdfdfd;
       margin: 0;
       padding: 1rem;
       color: #333;
     }
-    h1 {
+    header {
+      background-color: #f4eee1;
+      padding: 1.5rem 1rem;
       text-align: center;
-      color: #34495e;
-      margin-bottom: 1rem;
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      margin: 0;
+      color: #2c3e50;
+      font-size: 1.8rem;
     }
     .search-box {
       max-width: 600px;
-      margin: 0 auto 2rem auto;
+      margin: 2rem auto;
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
@@ -52,7 +59,9 @@
   </style>
 </head>
 <body>
-  <h1>Kamus Sumba – Indonesia</h1>
+  <header>
+    <h1>Kamus Sumba – Indonesia</h1>
+  </header>
   <div class="search-box">
     <select id="mode">
       <option value="to-indo">Sumba → Indonesia</option>
